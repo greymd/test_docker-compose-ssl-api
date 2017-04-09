@@ -13,7 +13,6 @@ services:
         command: "bash -c '$$(npm bin)/api-mock --port 80 api.md'"
         networks:
             my_net:
-                ipv4_address: 192.168.1.11
                 aliases:
                     - test1.com
 
@@ -24,7 +23,6 @@ services:
         command: "bash -c '$$(npm bin)/api-mock --port 80 api.md'"
         networks:
             my_net:
-                ipv4_address: 192.168.1.12
                 aliases:
                     - test2.com
 
@@ -34,13 +32,9 @@ services:
             - "3128:3128"
         networks:
             my_net:
-                ipv4_address: 192.168.1.2
 
 networks:
   my_net:
     ipam:
       driver: default
-      config:
-          - subnet: 192.168.1.0/16
-            gateway: 192.168.1.1
 
