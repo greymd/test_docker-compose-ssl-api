@@ -36,7 +36,7 @@ services:
             my_net:
 
 networks:
-  my_net:
-    ipam:
-      driver: default
+    my_net:
+        ipam:
+            driver: default
 
