@@ -1,0 +1,12 @@
+{
+  "name": "apimock",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "$(npm bin)/api-mock api.md"
+  },
+  "author": "Yasuhiro Yamada <greengregson@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "api-mock": "^0.3.2"
+  }
+}

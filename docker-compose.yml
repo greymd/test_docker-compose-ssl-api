@@ -1,0 +1,46 @@
+# ------------------
+# References:
+# ------------------
+# http://stackoverflow.com/questions/39493490/provide-static-ip-to-docker-containers-via-docker-compose
+
+version: '2'
+
+services:
+    test1:
+        build: "./docker/api"
+        volumes:
+            - "./docker/api/test1/api.md:/usr/src/app/api.md"
+        command: "bash -c '$$(npm bin)/api-mock --port 80 api.md'"
+        networks:
+            my_net:
+                ipv4_address: 192.168.1.11
+                aliases:
+                    - test1.com
+
+    test2:
+        build: "./docker/api"
+        volumes:
+            - "./docker/api/test2/api.md:/usr/src/app/api.md"
+        command: "bash -c '$$(npm bin)/api-mock --port 80 api.md'"
+        networks:
+            my_net:
+                ipv4_address: 192.168.1.12
+                aliases:
+                    - test2.com
+
+    my_proxy:
+        image: "sameersbn/squid:3.3.8-23"
+        ports:
+            - "3128:3128"
+        networks:
+            my_net:
+                ipv4_address: 192.168.1.2
+
+networks:
+  my_net:
+    ipam:
+      driver: default
+      config:
+          - subnet: 192.168.1.0/16
+            gateway: 192.168.1.1
+
