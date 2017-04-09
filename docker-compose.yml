@@ -10,7 +10,8 @@ services:
         build: "./docker/api"
         volumes:
             - "./docker/api/test1/api.md:/usr/src/app/api.md"
-        command: "bash -c '$$(npm bin)/api-mock --port 80 api.md'"
+            - "./docker/api/ssl:/usr/src/app/ssl"
+        command: "bash -c '$$(npm bin)/api-mock -s --ssl-port 443 --ssl-cert ssl/server.crt --ssl-key ssl/server.key --port 80 api.md'"
         networks:
             my_net:
                 aliases:
@@ -20,7 +21,8 @@ services:
         build: "./docker/api"
         volumes:
             - "./docker/api/test2/api.md:/usr/src/app/api.md"
-        command: "bash -c '$$(npm bin)/api-mock --port 80 api.md'"
+            - "./docker/api/ssl:/usr/src/app/ssl"
+        command: "bash -c '$$(npm bin)/api-mock -s --ssl-port 443 --ssl-cert ssl/server.crt --ssl-key ssl/server.key --port 80 api.md'"
         networks:
             my_net:
                 aliases:
